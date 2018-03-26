@@ -3,6 +3,8 @@ const request = require('request');
 const gmaps = require('./gmaps.js');
 const hbs = require('hbs');
 const fs = require('fs');
+
+const port = process.env.PORT || 8080;
 var app = express();
 
 hbs.registerPartials(__dirname + '/views/partials');
@@ -24,9 +26,9 @@ app.use((request,response,next) => {
 	next();
 });
 
-app.use((request,response,next) =>{
-	response.render('maintenance.hbs')
-})
+// app.use((request,response,next) =>{
+// 	response.render('maintenance.hbs')
+// });
 
 app.use(express.static(__dirname + '/public'));
 hbs.registerHelper('getCurrentYear', () => {
@@ -65,8 +67,8 @@ app.get('/weather', (request, response) => {
 	});
 })
 
-app.listen(8080, () => {
-    console.log('Server is up on the port 8080');
+app.listen(port, () => {
+    console.log(`Server is up on the port ${port}`);
     // here add the logic to return the weather based on the statically provided location and save it inside the weather variable
         gmaps.getWeather(47.6062, 122.3321).then((result) => {
         weather = 'The weather in seattle is ' + result.status + ' and is ' + result.temperature + ' degrees'
