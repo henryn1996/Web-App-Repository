@@ -11,7 +11,7 @@ hbs.registerPartials(__dirname + '/views/partials');
 
 app.set('view engine', 'hbs');
 app.use(express.static(__dirname + '/public'));
-
+// hi everyone
 var weather = ''; //variable to hold the weather info
 
 app.use((request,response,next) => {
